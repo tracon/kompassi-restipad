@@ -16,12 +16,6 @@ module KompassiAuth
     class << self
 
       def json_rpc(method_name, *args, **kwargs)
-        payload = {
-          "params" => [args, kwargs],
-          "method" => method_name,
-          "id" => 0,
-        }
-
         request = HTTPI::Request.new
         request.url = settings.IPA_JSONRPC
         request.auth.ssl.ca_cert_file = settings.IPA_CACERT_PATH
