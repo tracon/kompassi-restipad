@@ -6,7 +6,9 @@ GEM
     curb (0.8.8)
     httpi (2.4.0)
       rack
+    json (1.8.1)
     multi_json (1.11.0)
+    net-ldap (0.11)
     rack (1.6.0)
     rack-protection (1.5.3)
       rack
@@ -34,6 +36,8 @@ DEPENDENCIES
   configatron (~> 4.5.0)
   curb (~> 0.8.8)
   httpi (~> 2.4.0)
+  json (~> 1.8.1)
+  net-ldap (~> 0.11)
   sinatra (~> 1.4.6)
   sinatra-contrib (~> 1.4.2)
   sinatra-param (~> 1.4.0)
