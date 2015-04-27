@@ -19,7 +19,7 @@ module KompassiAuth
         request = HTTPI::Request.new
         request.url = settings.IPA_JSONRPC
         request.auth.ssl.ca_cert_file = settings.IPA_CACERT_PATH
-        request.auth.ssl.ssl_version = settings.SSL_VERSION
+        request.auth.ssl.ssl_version = settings.IPA_SSL_VERSION
         request.auth.gssnegotiate
         request.headers = {
           "Referer" => settings.IPA_JSONRPC,
@@ -36,7 +36,7 @@ module KompassiAuth
           raíse HTTPError, "HTTP Error: #{response.code}" if response.error?
         rescue StandardError => e
           puts e.message
-          puts e.backtrace.inspect
+          puts 'backstrace:', e.backtrace.inspect
           raise
         end
 
@@ -54,6 +54,7 @@ module KompassiAuth
 
         return result
       end
+      private :json_rpc
 
       def add_user_to_group(username, groupname)
         return json_rpc('group_add_member', groupname, user: [username])
@@ -96,25 +97,6 @@ module KompassiAuth
           end
         end
       end
-
-
-      # XXX Pasted from the orginal python settings,
-      #     TO-D
-      #     TO-DO: conversion to Ruby if needed
-      #
-
-      # def change_user_password(dn, old_password, new_password)
-      #   with ldap_session() as l:
-      #   l.simple_bind_s(dn, u(old_password))
-      #   l.passwd_s(dn, u(old_password), u(new_password))
-      # end
-
-      # def ldap_modify(dn, *modlist)
-      #   with ldap_session() as l:
-      #   l.modify_s(dn, modlist)
-      # end
-
-
 
     end
   end
